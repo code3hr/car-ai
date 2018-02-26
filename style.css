@@ -80,3 +80,15 @@ body {
     width: 400px;
     height: 150px;
 }
+
+.tableDebug {
+    width: 100%;
+    background-color: #fff;
+    color: #000;
+}
+
+.tableDebugSmall {
+    width: 50%;
+    background-color: #fff;
+    color: #000;
+}
