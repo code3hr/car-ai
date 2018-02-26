@@ -50,7 +50,7 @@ function moveWall() {
     var successRate = Math.floor((avoided / (avoided + crash) * 100));
 
     document.getElementById('topDebug').innerHTML = "&nbsp;[" + c + "]<br>&nbsp;Wall (" + getWallX + ", " + getWallY + ")<br>&nbsp;AI (" +
-        getAIX + ", " + getAIY + ")<br>&nbspWalls: " + walls + " Avoided: " + avoided + " Crash: " + crash + "Success rate: " + successRate + "%";
+        getAIX + ", " + getAIY + ")<br>&nbspWalls: " + walls + " Avoided: " + avoided + " Crash: " + crash + " Success rate: " + successRate + "%";
     if (getWallX <= 0) {
 
 
