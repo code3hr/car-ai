@@ -9,6 +9,7 @@ function tick() {
     document.getElementById('stepsDone').value = c;
     moveWall() //move wall to the left
     checkCollision();
+    experience();
 }
 
 var tickInterval;
@@ -23,7 +24,7 @@ function runSim(state) {
             runSim('0'); //force stop
 
         } else {
-            tickInterval = setInterval('tick()', 20);
+            tickInterval = setInterval('tick();', 20);
         }
 
     } else {
@@ -54,10 +55,7 @@ function moveWall() {
     if (getWallX <= 0) {
 
 
-        var randomWallYPos = Math.floor(Math.random() * (200 + 1) + 0);
-        document.getElementById("wall").style.marginTop = randomWallYPos + "px";
-        document.getElementById('wall').style.left = null;
-        document.getElementById('wall').style.right = '0px';
+
 
         walls++;
     } else {
@@ -98,7 +96,7 @@ function checkCollision() {
     if (getWallX < getAIX && getAIY >= getWallY - 100 && getAIY < getWallY || getWallX < getAIX && getWallY - 100 >
         getAIY && getWallY - 100 < getAIY + 50) {
 
-        moveCar('down');
+        // moveCar('down');
         document.getElementById('sensor_2').style.backgroundColor = "red";
 
         if (getWallX < 100) {
@@ -110,4 +108,88 @@ function checkCollision() {
         if (getWallX < 100) { avoided++; }
 
     }
+}
+var lastWallCount = 0;
+var lastAvoided = 0;
+var lastCrash = 0;
+var tryzone = 0;
+
+function experience() {
+
+
+    var aizone;
+    var wallzone;
+    //read experience database
+
+
+    //get AI and wall zone
+    var getWallY = document.getElementById('wall').offsetTop;
+    var getAIY = document.getElementById('ai').offsetTop;
+
+    var getWallCenter = (getWallY - 100) + 50;
+    if (getWallCenter <= 150) {
+        //this is zone 0
+        document.getElementById('t_wall_zone').innerHTML = "0";
+        wallzone = "0";
+    } else {
+        document.getElementById('t_wall_zone').innerHTML = "1";
+        wallzone = "1";
+    }
+    var getAICenter = (getAIY - 100) + 25;
+    if (getAICenter <= 150) {
+        document.getElementById('t_ai_zone').innerHTML = "0";
+        aizone = "0";
+
+    } else {
+        document.getElementById('t_ai_zone').innerHTML = "1";
+        aizone = "1";
+    }
+
+    //try actions
+    document.getElementById('t_try').innerHTML = tryzone;
+
+
+    //move ai
+    if (tryzone == 0) {
+        moveCar("up");
+    } else {
+        moveCar('down');
+    }
+    //read from experiment "database"
+    var buildvar = aizone + wallzone + tryzone;
+
+    var experienceDB = document.getElementById('succ_' + buildvar).innerHTML;
+
+
+
+    if (lastWallCount != walls) {
+
+
+        if (lastWallCount != avoided) {
+            experienceDB = parseInt(experienceDB) + parseInt(1);
+
+
+            document.getElementById('succ_' + buildvar).innerHTML = experienceDB;
+            lastAvoided = avoided;
+        }
+
+        if (lastCrash != crash) {
+            experienceDB = parseInt(experienceDB) - parseInt(1);
+
+
+            document.getElementById('succ_' + buildvar).innerHTML = experienceDB;
+
+            lastCrash = crash;
+        }
+
+        lastWallCount = walls;
+        tryzone = Math.floor(Math.random() * 2);
+
+        var randomWallYPos = Math.floor(Math.random() * (200 + 1) + 0);
+        document.getElementById("wall").style.marginTop = randomWallYPos + "px";
+        document.getElementById('wall').style.left = null;
+        document.getElementById('wall').style.right = '0px';
+    }
+
+
 }
