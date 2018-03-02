@@ -149,23 +149,45 @@ function experience() {
     document.getElementById('t_try').innerHTML = tryzone;
 
 
+
+
+    //read from experiment "database"
+    var buildvar = aizone + wallzone + tryzone;
+
+    var experienceDB = document.getElementById('succ_' + buildvar).innerHTML;
+
+    //read from DB and decide
+    if (tryzone == 0) {
+        buildvarOther = aizone + wallzone + 1;
+        experienceDBOther = document.getElementById('succ_' + buildvarOther).innerHTML;
+        if (parseInt(experienceDBOther) > parseInt(experienceDB) + parseInt(10)) {
+            buildvar = buildvarOther;
+            experienceDB = document.getElementById('succ_' + buildvar).innerHTML;
+            tryzone = 1;
+        }
+
+    }
+
+    if (tryzone == 1) {
+        buildvarOther = aizone + wallzone + 0;
+        experienceDBOther = document.getElementById('succ_' + buildvarOther).innerHTML;
+        if (parseInt(experienceDBOther) > parseInt(experienceDB) + parseInt(10)) {
+            buildvar = buildvarOther;
+            experienceDB = document.getElementById('succ_' + buildvar).innerHTML;
+            tryzone = 0;
+        }
+
+    }
     //move ai
     if (tryzone == 0) {
         moveCar("up");
     } else {
         moveCar('down');
     }
-    //read from experiment "database"
-    var buildvar = aizone + wallzone + tryzone;
-
-    var experienceDB = document.getElementById('succ_' + buildvar).innerHTML;
-
-
-
     if (lastWallCount != walls) {
 
 
-        if (lastWallCount != avoided) {
+        if (lastAvoided != avoided) {
             experienceDB = parseInt(experienceDB) + parseInt(1);
 
 
