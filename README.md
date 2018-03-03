@@ -4,6 +4,6 @@ simple way of viewing AI, car-ai has 3 sensors and it uses these sensor to reduc
 
 ## usage
 <p> clone and run index.html </p>
-<p> click that start button to run </p>
+<p> click that start button to run and wait for, let's say 10 min, for it to be train</p>
 
 ![car-ai](https://user-images.githubusercontent.com/16048403/36877794-3e975354-1dbc-11e8-8154-e7399e4e0ea4.PNG)
