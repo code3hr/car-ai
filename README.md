@@ -1,6 +1,6 @@
 # car-ai
 
-simple way of viewing AI, car-ai has 3 sensors and it uses these sensor to reduce it's chances of hitting an obstacle. This is a simple reflex agent with little intelligent skill, it is able to learn and make decision from mistakes, so it decide to move up or down in other to avoid accident
+simple way of viewing AI, car-ai has 3 sensors and it uses these sensors to maximize to its performance measure, given the evidence provided by what it perceived and whatever built-in knowledge it has. This is a simple rational agent with little intelligent skills, it is able to learn and make decision from mistakes, so it decide to move up or down in other to avoid accident
 
 ## running
 <p> clone and open index.html on your favourite web browser</p>
